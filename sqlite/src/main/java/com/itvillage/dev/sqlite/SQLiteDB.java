@@ -1,6 +1,7 @@
 package com.itvillage.dev.sqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import java.util.ArrayList;
 
@@ -11,14 +12,40 @@ import java.util.ArrayList;
 public class SQLiteDB {
 
    public static DatabaseHelper databaseHelper;
-    public  static void   crateDb(Context context, String dbName, ArrayList<String> columeName)
+
+    public static void crateDb(Context context, String dbName, String tableName, ArrayList<String> columeName)
     {
         String DATABASE_NAME=dbName+".db";
-        databaseHelper=new DatabaseHelper(context,DATABASE_NAME,columeName);
+        databaseHelper = new DatabaseHelper(context, DATABASE_NAME, tableName, columeName);
 
     }
-    public  static void  push(ArrayList<String> values)
+
+    public static boolean push(ArrayList<String> values)
     {
-        databaseHelper.insertDate(values);
+        if (databaseHelper.insertDate(values)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Cursor show(ArrayList<String> values) {
+        return databaseHelper.getData();
+    }
+
+    public static boolean update(String id, ArrayList<String> values) {
+        if (databaseHelper.updateData(id, values)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean delete(String id) {
+        if (databaseHelper.deleteData(id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
