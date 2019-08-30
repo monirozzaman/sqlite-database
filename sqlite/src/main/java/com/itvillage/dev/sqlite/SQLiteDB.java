@@ -29,7 +29,7 @@ public class SQLiteDB {
         }
     }
 
-    public static Cursor show(ArrayList<String> values) {
+    public static Cursor show() {
         return databaseHelper.getData();
     }
 
