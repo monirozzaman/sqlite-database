@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         for (String s : columeNames) {
             query = query + ","+s+" VARCHAR";
         }
-        db.execSQL("CREATE TABLE" + TABLE_NAME + "(" + query + ");");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + query + ");");
     }
 
     @Override
