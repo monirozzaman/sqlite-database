@@ -41,11 +41,15 @@ public class SQLiteDB {
         }
     }
 
-    public static boolean delete(String id) {
+    public static boolean deleteById(String id) {
         if (databaseHelper.deleteData(id)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public static void delete() {
+        databaseHelper.delete();
     }
 }
