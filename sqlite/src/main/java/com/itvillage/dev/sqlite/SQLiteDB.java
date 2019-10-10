@@ -11,35 +11,22 @@ import java.util.ArrayList;
 
 public class SQLiteDB {
 
-   public static DatabaseHelper databaseHelper;
-
-    /**
-     * This method is used to create database.
-     * @param context This is the context of this class
-     * @param databaseName  This is database name what you want
-     * @return int This returns average of numA, numB and numC.
-     */
-    public static void createDatabase(Context context, String databaseName)
-    {
-        String DATABASE_NAME=databaseName+".db";
-        databaseHelper = new DatabaseHelper(context, DATABASE_NAME);
-
-    }
+    public static DatabaseHelper databaseHelper;
 
     /**
      * This method is used to create table.
-     * @param tableName This is tableName name what you want
-     * @param columnName  This list is a column name list  whatever you want
+     *
+     * @param tableName  This is tableName name what you want
+     * @param columnName This list is a column name list  whatever you want
      * @return int This returns average of numA, numB and numC.
      */
-    public static boolean createTable(String tableName, ArrayList<String> columnName)
-    {
-       return databaseHelper.createTable(tableName, columnName);
+    public static void createTable(String tableName, ArrayList<String> columnName) {
+
+        databaseHelper.createTable(tableName, columnName);
     }
 
-    public static boolean insert(String tableName, ArrayList<String> values)
-    {
-        if (databaseHelper.insertDate(tableName,values)) {
+    public static boolean insert(String tableName, ArrayList<String> values) {
+        if (databaseHelper.insertDate(tableName, values)) {
             return true;
         } else {
             return false;
@@ -50,27 +37,33 @@ public class SQLiteDB {
         return databaseHelper.getData(tableName);
     }
 
-    public static Cursor findById(String tableName,String id) {
-        return databaseHelper.getDataById(tableName,id);
+    public static Cursor findById(String tableName, String id) {
+        return databaseHelper.getDataById(tableName, id);
     }
 
-    public static boolean updateRowById(String tableName,String id, ArrayList<String> values) {
-        if (databaseHelper.updateData(tableName,id, values)) {
+    public static boolean updateRowById(String tableName, String id, ArrayList<String> values) {
+        if (databaseHelper.updateData(tableName, id, values)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static boolean deleteRowById(String tableName,String id) {
-        if (databaseHelper.deleteData(tableName,id)) {
+    public static boolean deleteRowById(String tableName, String id) {
+        if (databaseHelper.deleteData(tableName, id)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static boolean dropTable(String tableName) {
-        return databaseHelper.dropTable(tableName);
+    public static void dropTable(String tableName) {
+        databaseHelper.dropTable(tableName);
+    }
+
+    public void createDatabase(Context context, String databaseName) {
+        String DATABASE_NAME = databaseName + ".db";
+        databaseHelper = new DatabaseHelper(context, DATABASE_NAME);
+
     }
 }
