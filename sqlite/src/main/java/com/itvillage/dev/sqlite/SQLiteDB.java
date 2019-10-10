@@ -13,43 +13,64 @@ public class SQLiteDB {
 
    public static DatabaseHelper databaseHelper;
 
-    public static void crateDb(Context context, String dbName, String tableName, ArrayList<String> columeName)
+    /**
+     * This method is used to create database.
+     * @param context This is the context of this class
+     * @param databaseName  This is database name what you want
+     * @return int This returns average of numA, numB and numC.
+     */
+    public static void createDatabase(Context context, String databaseName)
     {
-        String DATABASE_NAME=dbName+".db";
-        databaseHelper = new DatabaseHelper(context, DATABASE_NAME, tableName, columeName);
+        String DATABASE_NAME=databaseName+".db";
+        databaseHelper = new DatabaseHelper(context, DATABASE_NAME);
 
     }
 
-    public static boolean push(ArrayList<String> values)
+    /**
+     * This method is used to create table.
+     * @param tableName This is tableName name what you want
+     * @param columnName  This list is a column name list  whatever you want
+     * @return int This returns average of numA, numB and numC.
+     */
+    public static boolean createTable(String tableName, ArrayList<String> columnName)
     {
-        if (databaseHelper.insertDate(values)) {
+       return databaseHelper.createTable(tableName, columnName);
+    }
+
+    public static boolean insert(String tableName, ArrayList<String> values)
+    {
+        if (databaseHelper.insertDate(tableName,values)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static Cursor show() {
-        return databaseHelper.getData();
+    public static Cursor findAll(String tableName) {
+        return databaseHelper.getData(tableName);
     }
 
-    public static boolean update(String id, ArrayList<String> values) {
-        if (databaseHelper.updateData(id, values)) {
+    public static Cursor findById(String tableName,String id) {
+        return databaseHelper.getDataById(tableName,id);
+    }
+
+    public static boolean updateRowById(String tableName,String id, ArrayList<String> values) {
+        if (databaseHelper.updateData(tableName,id, values)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static boolean deleteById(String id) {
-        if (databaseHelper.deleteData(id)) {
+    public static boolean deleteRowById(String tableName,String id) {
+        if (databaseHelper.deleteData(tableName,id)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static void delete() {
-        databaseHelper.delete();
+    public static boolean dropTable(String tableName) {
+        return databaseHelper.dropTable(tableName);
     }
 }
