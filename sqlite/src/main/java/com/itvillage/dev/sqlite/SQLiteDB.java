@@ -13,6 +13,11 @@ public class SQLiteDB {
 
     public static DatabaseHelper databaseHelper;
 
+    public static void createDatabase(Context context, String databaseName) {
+        String DATABASE_NAME = databaseName + ".db";
+        databaseHelper = new DatabaseHelper(context, DATABASE_NAME);
+
+    }
     /**
      * This method is used to create table.
      *
@@ -20,6 +25,7 @@ public class SQLiteDB {
      * @param columnName This list is a column name list  whatever you want
      * @return int This returns average of numA, numB and numC.
      */
+
     public static void createTable(String tableName, ArrayList<String> columnName) {
 
         databaseHelper.createTable(tableName, columnName);
@@ -61,9 +67,5 @@ public class SQLiteDB {
         databaseHelper.dropTable(tableName);
     }
 
-    public void createDatabase(Context context, String databaseName) {
-        String DATABASE_NAME = databaseName + ".db";
-        databaseHelper = new DatabaseHelper(context, DATABASE_NAME);
 
-    }
 }
